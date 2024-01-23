@@ -1,12 +1,12 @@
 import * as React from "react"
 
-function Logo() {
+function Logo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 201.78 28.02"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width={280}
+      {...props}
     >
       <clipPath id="a">
         <rect height={28.02} rx={1.36} width={61.52} x={140.26} />

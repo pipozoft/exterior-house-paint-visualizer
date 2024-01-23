@@ -1,0 +1,50 @@
+export interface SwColor {
+  colorNumber: string;
+  coordinatingColors: SwCoordinatingColors;
+  description: string[];
+  id: string;
+  isExterior: boolean;
+  isInterior: boolean;
+  name: string;
+  lrv: number;
+  brandedCollectionNames: string[];
+  colorFamilyNames: string[];
+  brandKey: string;
+  red: number;
+  green: number;
+  blue: number;
+  hue: number;
+  saturation: number;
+  lightness: number;
+  hex: string;
+  isDark: boolean;
+  storeStripLocator: string;
+  similarColors: string[];
+  ignore: boolean;
+  archived: boolean;
+  lab: SwLab;
+}
+
+export interface SwCoordinatingColors {
+  coord1ColorId: string;
+  coord2ColorId: string;
+  whiteColorId: string;
+}
+
+export interface SwLab {
+  L: number;
+  A: number;
+  B: number;
+}
+
+// -----------
+export interface HoaScheme {
+  id: string;
+  name: string;
+  body: string
+  fascia: string
+  accent: string
+  bands: string
+  garage: string
+  frontDoor: string
+}
