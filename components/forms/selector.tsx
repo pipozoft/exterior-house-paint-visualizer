@@ -2,9 +2,8 @@
 
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
-import schemes from '@/app/data/hoa-schemes.json';
+import schemes from '@/lib/data/hoa-schemes.json';
 
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Command,
@@ -19,6 +18,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const options = schemes.map(s => {
     return {
@@ -27,11 +27,8 @@ const options = schemes.map(s => {
     }
 });
 
-interface Props {
-    onSelect?: (value: string) => void;
-}
 
-export function SelectorForm({onSelect}: Props) {
+function Selector() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [open, setOpen] = React.useState(false);
@@ -85,4 +82,8 @@ export function SelectorForm({onSelect}: Props) {
       </PopoverContent>
     </Popover>
   )
+}
+
+export function SelectorForm() {
+  return <React.Suspense><Selector/></React.Suspense>;
 }
