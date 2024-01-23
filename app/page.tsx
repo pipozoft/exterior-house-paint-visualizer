@@ -1,5 +1,5 @@
 import Logo from "@/components/brand/logo";
-import { SelectorForm } from "@/components/forms/selector";
+import { SelectorForm } from "@/components/forms/selectors";
 import HouseVisualization from "@/components/viz/house";
 
 export default function Home() {
