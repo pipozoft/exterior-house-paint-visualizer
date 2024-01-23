@@ -21,6 +21,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+import { DEFAULT_ROOF_COLOR } from "@/lib/constants";
 
 const options = schemes.map((s) => {
   return {
@@ -45,7 +46,7 @@ function RoofSelector() {
     [searchParams]
   );
 
-  const roofColor = searchParams.get("roofColor");
+  const roofColor = searchParams.get("roofColor") || DEFAULT_ROOF_COLOR;
   const handleOnChange = (e: any) => {
     const cleanValue = e.target.value.replace("#", "");
     router.push(

@@ -5,17 +5,7 @@ import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import Scheme from "./scheme";
 import { HoaScheme } from "@/lib/models";
-
-const DEFAULT_SCHEME = {
-  body: "7004",
-  fascia: "7004",
-  accent: "7004",
-  bands: "7004",
-  garage: "7004",
-  frontDoor: "7004",
-};
-
-const DEFAULT_ROOF_COLOR = 'DB7429';
+import { DEFAULT_ROOF_COLOR, DEFAULT_SCHEME } from "@/lib/constants";
 
 function House(props: React.SVGProps<SVGSVGElement>) {
   const searchParams = useSearchParams();
