@@ -8,6 +8,10 @@ export function getHexFromSwColorId(id: string) {
     return color ? color.hex : '#000';
 }
 
+export function getSwColorById(id: string) {
+  return colors.find(c => c.colorNumber === id);
+}
+
 export function getSchemeFromId(id: string) {
     return schemes.find(s => s.id === id);
 }

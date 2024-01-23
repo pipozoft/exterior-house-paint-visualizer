@@ -15,12 +15,15 @@ const DEFAULT_SCHEME = {
   frontDoor: "7004",
 };
 
+const DEFAULT_ROOF_COLOR = 'DB7429';
+
 function House(props: React.SVGProps<SVGSVGElement>) {
   const searchParams = useSearchParams();
   const schemeId = searchParams.get("schemeId");
-
+  const roofColor = searchParams.get("roofColor") || DEFAULT_ROOF_COLOR;
+  
   const scheme = (schemeId && getSchemeFromId(schemeId)) || DEFAULT_SCHEME;
-
+  
   const custom = {
     id: (scheme as HoaScheme).id,
     name: (scheme as HoaScheme).name,
@@ -42,7 +45,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
     >
       <g id="house-with-labels-grass">
         <path
-          id="Subtract"
+          stroke="#000000"
           fillRule="evenodd"
           clipRule="evenodd"
           d="M178.09 809.896C168.684 796.645 153.211 788 135.723 788c-26.965 0-49.137 20.557-51.684 46.855a52.217 52.217 0 00-10.117-.984C45.246 833.871 22 857.117 22 885.795c0 2.1.125 4.17.367 6.205h191.031l.071-.619a52.057 52.057 0 006.988.467c28.676 0 51.922-23.248 51.922-51.924 0-28.678-23.246-51.924-51.922-51.924-17.492 0-32.957 8.645-42.367 21.896z"
@@ -55,13 +58,11 @@ function House(props: React.SVGProps<SVGSVGElement>) {
             stroke="#000"
             d="M122.5 171.5H555.5V893.5H122.5z"
           />
-          <g id="roof" fill="#DB7429" stroke="#000">
+          <g id="roof" fill={`#${roofColor}`} stroke="#000">
             <path
-              id="Rectangle 22"
               d="M109.653 577.5l9.73-36h426.234l9.73 36H109.653z"
             />
             <path
-              id="Rectangle 10"
               d="M147.379 29.5l-39.719 141h1164.68l-39.72-141H147.379z"
             />
           </g>
@@ -426,6 +427,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
         </g>
         <path stroke="#000" strokeWidth={2} d="M0 893L1391 893" />
         <path
+        stroke="#000000"
           fillRule="evenodd"
           clipRule="evenodd"
           d="M1119.1 892a50.35 50.35 0 01-6.1-24.076c0-28.678 24.02-51.924 53.64-51.924 18.07 0 34.05 8.648 43.77 21.9 9.72-13.252 25.7-21.9 43.77-21.9 27.86 0 50.75 20.557 53.39 46.855a55.84 55.84 0 0110.45-.984c21.59 0 40.19 12.34 48.7 30.129H1119.1z"
@@ -433,7 +435,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
         />
       </g>
     </svg>
-    <Scheme value={custom}/>
+    <Scheme value={(scheme as HoaScheme)}/>
     </>
   );
 }
