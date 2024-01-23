@@ -12,7 +12,6 @@ export function getSchemeFromId(id: string) {
     return schemes.find(s => s.id === id);
 }
 
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }

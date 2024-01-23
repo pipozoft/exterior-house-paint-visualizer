@@ -3,6 +3,8 @@
 import { getHexFromSwColorId, getSchemeFromId } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
+import Scheme from "./scheme";
+import { HoaScheme } from "@/lib/models";
 
 const DEFAULT_SCHEME = {
   body: "7004",
@@ -20,6 +22,8 @@ function House(props: React.SVGProps<SVGSVGElement>) {
   const scheme = (schemeId && getSchemeFromId(schemeId)) || DEFAULT_SCHEME;
 
   const custom = {
+    id: (scheme as HoaScheme).id,
+    name: (scheme as HoaScheme).name,
     body: getHexFromSwColorId(scheme.body),
     fascia: getHexFromSwColorId(scheme.fascia),
     accent: getHexFromSwColorId(scheme.accent),
@@ -29,6 +33,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
   };
 
   return (
+    <>
     <svg
       viewBox="0 0 1391 894"
       fill="none"
@@ -428,6 +433,8 @@ function House(props: React.SVGProps<SVGSVGElement>) {
         />
       </g>
     </svg>
+    <Scheme value={custom}/>
+    </>
   );
 }
 
