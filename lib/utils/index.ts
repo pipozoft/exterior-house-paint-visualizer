@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import colors from '@/lib/data/sw-colors.json';
 import schemes from '@/lib/data/hoa-schemes.json';
+import doorSchemes from '@/lib/data/door-schemes.json';
 
 export function getHexFromSwColorId(id: string) {
     const color = colors.find(c => c.colorNumber === id);
@@ -14,6 +15,10 @@ export function getSwColorById(id: string) {
 
 export function getSchemeFromId(id: string) {
     return schemes.find(s => s.id === id);
+}
+
+export function getDoorSchemeFromId(id: string) {
+  return doorSchemes.find(s => s.id === id);
 }
 
 export function cn(...inputs: ClassValue[]) {

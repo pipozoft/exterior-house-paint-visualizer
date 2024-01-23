@@ -8,4 +8,5 @@ export const DEFAULT_SCHEME = {
   };
   
   export const DEFAULT_ROOF_COLOR = 'DB7429';
-  
+
+  export const DEFAULT_DOOR_SCHEME = 'd40';

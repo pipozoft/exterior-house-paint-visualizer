@@ -104630,5 +104630,56 @@
             "A": 16.467477171041743,
             "B": 29.340315936648743
         }
+    },
+    {
+        "colorNumber": "WHITE",
+        "coordinatingColors": {
+            "coord1ColorId": "1777",
+            "coord2ColorId": "2196"
+        },
+        "description": [
+            "Soft",
+            "Bright",
+            "Glowing"
+        ],
+        "id": "1234",
+        "isExterior": true,
+        "isInterior": true,
+        "name": "Rustic Adobe",
+        "lrv": 38.166,
+        "brandedCollectionNames": [
+            "Assistance"
+        ],
+        "colorFamilyNames": [
+            "NA"
+        ],
+        "brandKey": "SW",
+        "red": 211,
+        "green": 154,
+        "blue": 114,
+        "hue": 0.06872852233676975,
+        "saturation": 0.5243243243243242,
+        "lightness": 0.6372549019607843,
+        "hex": "#fff",
+        "isDark": false,
+        "similarColors": [
+            "2039",
+            "2046",
+            "11187",
+            "2032",
+            "1680",
+            "2047",
+            "2320",
+            "11371",
+            "1582",
+            "1552"
+        ],
+        "ignore": false,
+        "archived": true,
+        "lab": {
+            "L": 68.15041807560891,
+            "A": 16.467477171041743,
+            "B": 29.340315936648743
+        }
     }
 ]

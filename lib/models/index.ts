@@ -38,13 +38,16 @@ export interface SwLab {
 }
 
 // -----------
-export interface HoaScheme {
+export interface DoorScheme {
   id: string;
   name: string;
+  garage: string
+  frontDoor: string
+}
+
+export interface HoaScheme extends DoorScheme {
   body: string
   fascia: string
   accent: string
   bands: string
-  garage: string
-  frontDoor: string
 }

@@ -12,7 +12,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import schemes from "@/lib/data/hoa-schemes.json";
+import schemes from "@/lib/data/door-schemes.json";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Label } from "@/components/ui/label";
@@ -25,12 +25,12 @@ const options = schemes.map((s) => {
     };
   });
   
-  export function SchemeSelector() {
+  export function DoorSelector() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [open, setOpen] = useState(false);
   
-    const schemeIdParam = searchParams.get("schemeId");
+    const doorIdParam = searchParams.get("doorId");
   
     // Get a new searchParams string by merging the current
     // searchParams with a provided key/value pair
@@ -45,12 +45,12 @@ const options = schemes.map((s) => {
     );
   
     const [value, setValue] = useState(
-      options.find((o) => o.value === schemeIdParam)?.value || ""
+      options.find((o) => o.value === doorIdParam)?.value || ""
     );
   
     return (
       <>
-        <Label htmlFor="roofColor">Select Approved Paint Scheme:</Label>
+        <Label htmlFor="roofColor">Select Approved Door Scheme:</Label>
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
@@ -75,12 +75,12 @@ const options = schemes.map((s) => {
                     key={option.value}
                     value={option.value}
                     onSelect={(currentValue) => {
-                      const schemeId = currentValue === value ? "" : currentValue;
-                      setValue(schemeId);
+                      const doorId = currentValue === value ? "" : currentValue;
+                      setValue(doorId);
                       router.push(
                         `${location.pathname}?${createQueryString(
-                          "schemeId",
-                          schemeId
+                          "doorId",
+                          doorId
                         )}`
                       );
                       setOpen(false);

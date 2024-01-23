@@ -1,18 +1,20 @@
 "use client";
 
-import { getHexFromSwColorId, getSchemeFromId } from "@/lib/utils";
+import { getDoorSchemeFromId, getHexFromSwColorId, getSchemeFromId } from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import Scheme from "./scheme";
-import { HoaScheme } from "@/lib/models";
-import { DEFAULT_ROOF_COLOR, DEFAULT_SCHEME } from "@/lib/constants";
+import { HoaScheme, DoorScheme } from "@/lib/models";
+import { DEFAULT_DOOR_SCHEME, DEFAULT_ROOF_COLOR, DEFAULT_SCHEME } from "@/lib/constants";
 
 function House(props: React.SVGProps<SVGSVGElement>) {
   const searchParams = useSearchParams();
   const schemeId = searchParams.get("schemeId");
   const roofColor = searchParams.get("roofColor") || DEFAULT_ROOF_COLOR;
-  
+  const doorId = searchParams.get("doorId");
   const scheme = (schemeId && getSchemeFromId(schemeId)) || DEFAULT_SCHEME;
+
+  const doorScheme = doorId && getDoorSchemeFromId(doorId);
   
   const custom = {
     id: (scheme as HoaScheme).id,
@@ -24,6 +26,16 @@ function House(props: React.SVGProps<SVGSVGElement>) {
     garage: getHexFromSwColorId(scheme.garage),
     frontDoor: getHexFromSwColorId(scheme.frontDoor),
   };
+
+  const door =  (() => {
+    if (!doorScheme) return;
+    return {
+      id: (doorScheme as DoorScheme).id,
+      name: (doorScheme as DoorScheme).name,
+      garage: getHexFromSwColorId((doorScheme as DoorScheme)?.garage),
+      frontDoor: getHexFromSwColorId((doorScheme as DoorScheme)?.frontDoor),
+    };
+  })();
 
   return (
     <>
@@ -129,18 +141,20 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           </g>
           <path
             id="bedroom-window-frame"
-            fill="#fff"
+            // fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
             d="M249 214H449V387H249z"
           />
           <path
             id="bathroom-window-frame"
-            fill="#fff"
+            // fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
             d="M991 213H1113V351H991z"
           />
           <path
             id="door-frame"
-            // fill={custom.frontDoor}
-            fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            // fill="#fff"
             stroke="#000"
             d="M605.5 541.5H738.5V801.5H605.5z"
           />
@@ -161,7 +175,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="door-semi-frame"
             d="M691.5 426.5c47.33 0 85.729 38.234 85.999 85.5H605.501c.27-47.266 38.669-85.5 85.999-85.5z"
-            fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
             stroke="#000"
           />
           <path
@@ -173,8 +187,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="sidelight-frame"
             transform="matrix(-1 0 0 1 777 541)"
-            // fill={custom.frontDoor}
-            fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
             stroke="#000"
             d="M-0.5 0.5H38.5V260.5H-0.5z"
           />
@@ -238,7 +251,8 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="living-room-window"
             d="M922 652.019h.089C946.187 596.08 1001.11 557 1065 557s118.81 39.08 142.91 95.019h.09V812H922V652.019z"
-            fill="#fff"
+            // fill="#fff"
+            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
           />
           <g id="living-room-glass" fill="#3D3D3D" stroke="#000">
             <path d="M1200.23 651.5H929.766c22.956-51.835 74.874-88 135.234-88 60.36 0 112.28 36.165 135.23 88z" />
@@ -250,7 +264,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
             <path
               id="garage-element"
               d="M200 642.5h279c19.054 0 34.5 15.446 34.5 34.5v216.5h-348V677c0-19.054 15.446-34.5 34.5-34.5z"
-              fill={custom.garage}
+              fill={door?.garage || (schemeId && custom.garage || '#fff')}
               stroke="#000"
             />
             <path
