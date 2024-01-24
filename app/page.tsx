@@ -1,5 +1,6 @@
 import Logo from "@/components/brand/logo";
 import { SelectorForm } from "@/components/forms/selectors";
+import { Button } from "@/components/ui/button";
 import HouseVisualization from "@/components/viz/house";
 
 export default function Home() {
@@ -12,6 +13,8 @@ export default function Home() {
         </footer>
 
         <SelectorForm />
+
+        <a className="block my-4 hover:underline" href="/">Reset All</a>
       </div>
       <div className="lg:col-span-4 lg:h-screen flex flex-col justify-center shadow-xl">
         <HouseVisualization

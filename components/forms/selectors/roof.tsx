@@ -31,7 +31,7 @@ export function RoofSelector() {
     return (
       <div className="mb-4">
         <Label htmlFor="roofColor">Select Roof Color:</Label>
-        <Input id="roofColor" name="roofColor" type="color" value={`#${roofColor}`} onChange={handleOnChange} />
+        <Input className="bg-white" id="roofColor" name="roofColor" type="color" value={`#${roofColor}`} onChange={handleOnChange} />
       </div>
     );
   }
