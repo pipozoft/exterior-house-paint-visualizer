@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 import colors from '@/lib/data/sw-colors.json';
 import schemes from '@/lib/data/hoa-schemes.json';
 import doorSchemes from '@/lib/data/door-schemes.json';
+import { HoaScheme } from "../models";
 
 export function getHexFromSwColorId(id: string) {
     const color = colors.find(c => c.colorNumber === id);
@@ -13,7 +14,7 @@ export function getSwColorById(id: string) {
   return colors.find(c => c.colorNumber === id);
 }
 
-export function getSchemeFromId(id: string) {
+export function getSchemeFromId(id: string): HoaScheme | undefined {
     return schemes.find(s => s.id === id);
 }
 

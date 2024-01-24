@@ -1,11 +1,5 @@
 [
     {
-        "id": "d40",
-        "name": "K Door Scheme 40",
-        "garage": "WHITE",
-        "frontDoor": "WHITE"
-    },
-    {
         "id": "d41",
         "name": "K Door Scheme 41",
         "garage": "6006",
@@ -28,5 +22,47 @@
         "name": "K Door Scheme 44",
         "garage": "6069",
         "frontDoor": "6069"
+    },
+    {
+        "id": "cl30",
+        "name": "CL 30",
+        "garage": "6069",
+        "frontDoor": "6069"
+    },
+    {
+        "id": "cl31",
+        "name": "CL 31",
+        "garage": "6006",
+        "frontDoor": "6006"
+    },
+    {
+        "id": "cl32",
+        "name": "CL 32",
+        "garage": "2856",
+        "frontDoor": "2856"
+    },
+    {
+        "id": "cl33",
+        "name": "CL 33",
+        "garage": "7027",
+        "frontDoor": "7027"
+    },
+    {
+        "id": "cl34",
+        "name": "CL 34",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "cl35",
+        "name": "CL 35",
+        "garage": "6076",
+        "frontDoor": "6076"
+    },
+    {
+        "id": "cl36",
+        "name": "CL 36",
+        "garage": "9183",
+        "frontDoor": "9183"
     }
 ]

@@ -12,12 +12,12 @@ export default function Scheme({ value }: Props) {
     <>
       {value && (
         <div className="grid lg:grid-rows-3 lg:grid-cols-3 p-4">
-          <Color id={value.body} title="Body" />
-          <Color id={value.fascia} title="fascia" />
-          <Color id={value.accent} title="accent" />
-          <Color id={value.bands} title="Stucco Moldings" />
-          <Color id={value.garage} title="Garage Door" />
-          <Color id={value.frontDoor} title="Front Door" />
+          <Color id={value.body || 'WHITE'} title="Body" />
+          <Color id={value.fascia || 'WHITE'} title="fascia" />
+          <Color id={value.accent || 'WHITE'} title="accent" />
+          <Color id={value.bands || 'WHITE'} title="Stucco Moldings" />
+          <Color id={value.garage || 'WHITE'} title="Garage Door" />
+          <Color id={value.frontDoor || 'WHITE'} title="Front Door" />
         </div>
       )}
     </>

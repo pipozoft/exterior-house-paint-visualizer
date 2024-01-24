@@ -38,6 +38,10 @@ const options = schemes.map((s) => {
       (name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set(name, value);
+
+        if (params.get('trimOption')) {
+            params.delete('trimOption');
+        }
   
         return params.toString();
       },

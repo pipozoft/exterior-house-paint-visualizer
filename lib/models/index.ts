@@ -41,13 +41,15 @@ export interface SwLab {
 export interface DoorScheme {
   id: string;
   name: string;
-  garage: string
-  frontDoor: string
+  garage?: string | null
+  frontDoor?: string | null
 }
 
 export interface HoaScheme extends DoorScheme {
   body: string
-  fascia: string
-  accent: string
-  bands: string
+  fascia?: string | null
+  accent?: string | null
+  bands?: string | null
+  trimOptions?: string[];
+  isReversible?: boolean;
 }

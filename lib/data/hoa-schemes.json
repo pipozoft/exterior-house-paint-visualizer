@@ -258,5 +258,17 @@
         "bands": "6106",
         "garage": "6106",
         "frontDoor": "6106"
+    },
+    {
+        "id": "cl1",
+        "name": "Scheme CL1",
+        "body": "6120",
+        "fascia": null,
+        "accent": null,
+        "bands": null,
+        "garage": null,
+        "frontDoor": null,
+        "trimOptions": ["6126", "6122"],
+        "isReversible": true
     }
 ]

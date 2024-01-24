@@ -5,37 +5,44 @@ import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import Scheme from "./scheme";
 import { HoaScheme, DoorScheme } from "@/lib/models";
-import { DEFAULT_DOOR_SCHEME, DEFAULT_ROOF_COLOR, DEFAULT_SCHEME } from "@/lib/constants";
+import { DEFAULT_ROOF_COLOR, DEFAULT_SCHEME } from "@/lib/constants";
 
 function House(props: React.SVGProps<SVGSVGElement>) {
   const searchParams = useSearchParams();
   const schemeId = searchParams.get("schemeId");
   const roofColor = searchParams.get("roofColor") || DEFAULT_ROOF_COLOR;
   const doorId = searchParams.get("doorId");
-  const scheme = (schemeId && getSchemeFromId(schemeId)) || DEFAULT_SCHEME;
+  const trimOption = parseInt(searchParams.get("trimOption") || '0');
 
+  const scheme = (schemeId && getSchemeFromId(schemeId)) || (DEFAULT_SCHEME as HoaScheme);
   const doorScheme = doorId && getDoorSchemeFromId(doorId);
   
-  const custom = {
-    id: (scheme as HoaScheme).id,
-    name: (scheme as HoaScheme).name,
-    body: getHexFromSwColorId(scheme.body),
-    fascia: getHexFromSwColorId(scheme.fascia),
-    accent: getHexFromSwColorId(scheme.accent),
-    bands: getHexFromSwColorId(scheme.bands),
-    garage: getHexFromSwColorId(scheme.garage),
-    frontDoor: getHexFromSwColorId(scheme.frontDoor),
+  let custom: HoaScheme = {
+    ...scheme,
   };
 
-  const door =  (() => {
-    if (!doorScheme) return;
-    return {
-      id: (doorScheme as DoorScheme).id,
-      name: (doorScheme as DoorScheme).name,
-      garage: getHexFromSwColorId((doorScheme as DoorScheme)?.garage),
-      frontDoor: getHexFromSwColorId((doorScheme as DoorScheme)?.frontDoor),
-    };
-  })();
+  if (scheme.trimOptions) {
+    custom.fascia = scheme.trimOptions?.at(trimOption);
+    custom.accent = scheme.trimOptions?.at(trimOption);
+    custom.bands = scheme.trimOptions?.at(trimOption);
+    custom.garage = scheme.trimOptions?.at(trimOption);
+    custom.frontDoor = scheme.trimOptions?.at(trimOption);
+  }
+
+  if (doorScheme) {
+    custom.frontDoor = doorScheme.frontDoor;
+    custom.garage = doorScheme.garage;
+  }
+  
+  const paint = {
+    ...scheme,
+    body: getHexFromSwColorId(scheme.body),
+    fascia: getHexFromSwColorId(custom.fascia!) || scheme.fascia && getHexFromSwColorId(scheme.fascia),
+    accent: getHexFromSwColorId(custom.accent!) || scheme.accent && getHexFromSwColorId(scheme.accent),
+    bands: getHexFromSwColorId(custom.bands!) || scheme.bands && getHexFromSwColorId(scheme.bands),
+    garage: getHexFromSwColorId(custom.garage!) || scheme.garage && getHexFromSwColorId(scheme.garage),
+    frontDoor: getHexFromSwColorId(custom.frontDoor!) || scheme.frontDoor && getHexFromSwColorId(scheme.frontDoor),
+  };
 
   return (
     <>
@@ -56,7 +63,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
         <g id="house">
           <path
             id="body-left"
-            fill={custom.body}
+            fill={paint.body}
             stroke="#000"
             d="M122.5 171.5H555.5V893.5H122.5z"
           />
@@ -70,13 +77,13 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           </g>
           <path
             id="body-right"
-            fill={custom.body}
+            fill={paint.body}
             stroke="#000"
             d="M823.5 171.5H1256.5V893.5H823.5z"
           />
           <path
             id="body-center-back"
-            fill={custom.body}
+            fill={paint.body}
             stroke="#000"
             d="M556.5 171.5H822.5V893.5H556.5z"
           />
@@ -92,7 +99,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               fillRule="evenodd"
               clipRule="evenodd"
               d="M823 171H556v723h267V171zM691 414c-53.572 0-97 43.428-97 97v305h194V511c0-53.572-43.428-97-97-97z"
-              fill={custom.body}
+              fill={paint.body}
             />
             <path
               d="M556 171v-1h-1v1h1zm267 0h1v-1h-1v1zM556 894h-1v1h1v-1zm267 0v1h1v-1h-1zm-229-78h-1v1h1v-1zm194 0v1h1v-1h-1zM556 172h267v-2H556v2zm1 722V171h-2v723h2zm266-1H556v2h267v-2zm-1-722v723h2V171h-2zM595 511c0-53.019 42.981-96 96-96v-2c-54.124 0-98 43.876-98 98h2zm0 305V511h-2v305h2zm193-1H594v2h194v-2zm-1-304v305h2V511h-2zm-96-96c53.019 0 96 42.981 96 96h2c0-54.124-43.876-98-98-98v2z"
@@ -100,7 +107,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               mask="url(#path-7-inside-1_124_281)"
             />
           </g>
-          <g id="fascia" fill={custom.fascia} stroke="#000">
+          <g id="fascia" fill={paint.fascia || '#fff'} stroke="#000">
             <path id="Rectangle 11" d="M122.5 171.5H555.5V180.5H122.5z" />
             <path id="Rectangle 21" d="M119.5 577.5H555.5V586.5H119.5z" />
             <path id="Rectangle 13" d="M823.5 171.5H1256.5V180.5H823.5z" />
@@ -121,7 +128,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               fillRule="evenodd"
               clipRule="evenodd"
               d="M648 277.434c1.496-20.538 17.898-36.939 38.436-38.434v38.434H648zm.022 6.424c1.63 20.401 17.973 36.654 38.414 38.142v-38.142h-38.414zm44.838 0v38.12c20.302-1.623 36.496-17.817 38.118-38.12H692.86zm38.14-6.424c-1.489-20.439-17.74-36.781-38.14-38.411v38.411H731z"
-              fill={custom.accent}
+              fill={paint.accent || '#fff'}
             />
             <path
               d="M686.436 239h1v-1.075l-1.073.078.073.997zM648 277.434l-.997-.072-.078 1.072H648v-1zm38.436 0v1h1v-1h-1zm-38.414 6.424v-1h-1.083l.086 1.08.997-.08zM686.436 322l-.073.998 1.073.078V322h-1zm0-38.142h1v-1h-1v1zm6.424 0v-1h-1v1h1zm0 38.12h-1v1.083l1.08-.086-.08-.997zm38.118-38.12l.997.08.086-1.08h-1.083v1zm.022-6.424v1h1.075l-.078-1.072-.997.072zm-38.14-38.411l.08-.997-1.08-.087v1.084h1zm0 38.411h-1v1h1v-1zm-6.497-39.431c-21.033 1.531-37.829 18.326-39.36 39.359l1.994.145c1.46-20.043 17.468-36.051 37.511-37.51l-.145-1.994zm1.073 39.431V239h-2v38.434h2zm-39.436 1h38.436v-2H648v2zm-.975 5.504c1.669 20.893 18.405 37.536 39.338 39.06l.145-1.995c-19.947-1.452-35.899-17.315-37.489-37.224l-1.994.159zM687.436 322v-38.142h-2V322h2zm-1-39.142h-38.414v2h38.414v-2zm5.424 1v38.12h2v-38.12h-2zm1.08 39.117c20.791-1.662 37.374-18.245 39.035-39.037l-1.994-.159c-1.582 19.813-17.388 35.619-37.201 37.202l.16 1.994zm38.038-40.117H692.86v2h38.118v-2zm1.019-5.496c-1.524-20.932-18.166-37.667-39.057-39.336l-.16 1.993c19.908 1.591 35.77 17.541 37.223 37.488l1.994-.145zm-40.137-38.339v38.411h2v-38.411h-2zm1 39.411H731v-2h-38.14v2z"
@@ -129,7 +136,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               mask="url(#path-16-inside-2_124_281)"
             />
           </g>
-          <g id="bands" fill={custom.bands} stroke="#000">
+          <g id="bands" fill={paint.bands || '#fff'} stroke="#000">
             <path d="M122.5 189.5H555.5V208.5H122.5z" />
             <path d="M823.5 189.5H1256.5V208.5H823.5z" />
             <path d="M243.5 208.5H453.5V393.5H243.5z" />
@@ -142,18 +149,18 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="bedroom-window-frame"
             // fill="#fff"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.frontDoor || '#fff'}
             d="M249 214H449V387H249z"
           />
           <path
             id="bathroom-window-frame"
             // fill="#fff"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.garage || '#fff'}
             d="M991 213H1113V351H991z"
           />
           <path
             id="door-frame"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.garage || '#fff'}
             // fill="#fff"
             stroke="#000"
             d="M605.5 541.5H738.5V801.5H605.5z"
@@ -175,7 +182,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="door-semi-frame"
             d="M691.5 426.5c47.33 0 85.729 38.234 85.999 85.5H605.501c.27-47.266 38.669-85.5 85.999-85.5z"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.garage || '#fff'}
             stroke="#000"
           />
           <path
@@ -187,7 +194,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="sidelight-frame"
             transform="matrix(-1 0 0 1 777 541)"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.garage || '#fff'}
             stroke="#000"
             d="M-0.5 0.5H38.5V260.5H-0.5z"
           />
@@ -203,7 +210,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               fillRule="evenodd"
               clipRule="evenodd"
               d="M822 816h31.886v26h30.557v26H915v26h-93v-78z"
-              fill={custom.body}
+              fill={paint.body}
             />
             <path
               d="M853.886 816h1v-1h-1v1zM822 816v-1h-1v1h1zm31.886 26h-1v1h1v-1zm30.557 0h1v-1h-1v1zm0 26h-1v1h1v-1zM915 868h1v-1h-1v1zm0 26v1h1v-1h-1zm-93 0h-1v1h1v-1zm31.886-79H822v2h31.886v-2zm1 27v-26h-2v26h2zm29.557-1h-30.557v2h30.557v-2zm1 27v-26h-2v26h2zm-1 1H915v-2h-30.557v2zM914 868v26h2v-26h-2zm1 25h-30.557v2H915v-2zm-30.557 0h-1.329v2h1.329v-2zm-30.557 2h29.228v-2h-29.228v2zm-1.329 0h1.329v-2h-1.329v2zM822 895h30.557v-2H822v2zm-1-79v78h2v-78h-2z"
@@ -211,7 +218,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
               mask="url(#path-34-inside-3_124_281)"
             />
           </g>
-          <g id="stucco" fill={custom.bands} stroke="#000">
+          <g id="stucco" fill={paint.bands || '#fff'} stroke="#000">
             <path d="M119.5 717.5H555.5V726.5H119.5z" />
             <path d="M121.5 726.5H555.5V730.5H121.5z" />
             <path d="M823.5 646.5H1259.5V672.5H823.5z" />
@@ -251,8 +258,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
           <path
             id="living-room-window"
             d="M922 652.019h.089C946.187 596.08 1001.11 557 1065 557s118.81 39.08 142.91 95.019h.09V812H922V652.019z"
-            // fill="#fff"
-            fill={door?.frontDoor || (schemeId && custom.garage || '#fff')}
+            fill={paint.garage || '#fff'}
           />
           <g id="living-room-glass" fill="#3D3D3D" stroke="#000">
             <path d="M1200.23 651.5H929.766c22.956-51.835 74.874-88 135.234-88 60.36 0 112.28 36.165 135.23 88z" />
@@ -264,7 +270,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
             <path
               id="garage-element"
               d="M200 642.5h279c19.054 0 34.5 15.446 34.5 34.5v216.5h-348V677c0-19.054 15.446-34.5 34.5-34.5z"
-              fill={door?.garage || (schemeId && custom.garage || '#fff')}
+              fill={paint.garage || '#fff'}
               stroke="#000"
             />
             <path
@@ -439,7 +445,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
         />
       </g>
     </svg>
-    <Scheme value={(scheme as HoaScheme)}/>
+    <Scheme value={custom}/>
     </>
   );
 }
