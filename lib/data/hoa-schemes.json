@@ -573,5 +573,165 @@
         "bands": "7554",
         "garage": "7554",
         "frontDoor": "7554"
+    },
+    {
+        "id": "40",
+        "name": "Scheme 40",
+        "body": "6050",
+        "fascia": "6336",
+        "accent": "6336",
+        "bands": "6336",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "40r",
+        "name": "Scheme 40R",
+        "body": "6336",
+        "fascia": "6050",
+        "accent": "6050",
+        "bands": "6050",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "47",
+        "name": "Scheme 47",
+        "body": "6637",
+        "fascia": "6638",
+        "accent": "6638",
+        "bands": "6638",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "54r",
+        "name": "Scheme 54R",
+        "body": "6378",
+        "fascia": "6386",
+        "accent": "6386",
+        "bands": "6386",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "55",
+        "name": "Scheme 55",
+        "body": "6120",
+        "fascia": "6126",
+        "accent": "6126",
+        "bands": "6126",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "59",
+        "name": "Scheme 59R",
+        "body": "6021",
+        "fascia": "6023",
+        "accent": "6023",
+        "bands": "6023",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "64",
+        "name": "Scheme 64",
+        "body": "7015",
+        "fascia": "7014",
+        "accent": "7014",
+        "bands": "7014",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "64r",
+        "name": "Scheme 64R",
+        "body": "7014",
+        "fascia": "7015",
+        "accent": "7015",
+        "bands": "7015",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "70",
+        "name": "Scheme 70",
+        "body": "7679",
+        "fascia": "7557",
+        "accent": "7557",
+        "bands": "7557",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "70r",
+        "name": "Scheme 70R",
+        "body": "7557",
+        "fascia": "7679",
+        "accent": "7679",
+        "bands": "7679",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "71",
+        "name": "Scheme 71",
+        "body": "6109",
+        "fascia": "6119",
+        "accent": "6119",
+        "bands": "6119",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "72",
+        "name": "Scheme 72",
+        "body": "6360",
+        "fascia": "6659",
+        "accent": "6659",
+        "bands": "6659",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "73",
+        "name": "Scheme 73",
+        "body": "6373",
+        "fascia": "6371",
+        "accent": "6371",
+        "bands": "6371",
+        "garage": "7006",
+        "frontDoor": "7006"
+    },
+    {
+        "id": "80",
+        "name": "Scheme 80",
+        "body": "6050",
+        "fascia": "6339",
+        "accent": "6339",
+        "bands": "6339",
+        "garage": "6021",
+        "frontDoor": "6021"
+    },
+    {
+        "id": "81",
+        "name": "Scheme 81",
+        "body": "6100",
+        "fascia": "9089",
+        "accent": "9089",
+        "bands": "9089",
+        "garage": "6069",
+        "frontDoor": "6069"
+    },
+    {
+        "id": "82",
+        "name": "Scheme 82",
+        "body": "6339",
+        "fascia": "6371",
+        "accent": "6371",
+        "bands": "6371",
+        "garage": "6069",
+        "frontDoor": "6069"
     }
 ]
