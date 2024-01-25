@@ -30,11 +30,6 @@ function House(props: React.SVGProps<SVGSVGElement>) {
     custom.frontDoor = scheme.trimOptions?.at(trimOption);
   }
 
-  if (doorScheme) {
-    custom.frontDoor = doorScheme.frontDoor;
-    custom.garage = doorScheme.garage;
-  }
-
   if (reverse && reverse === 1) {
     const newTrim = custom.body;
     custom.body = custom.accent!;
@@ -43,6 +38,11 @@ function House(props: React.SVGProps<SVGSVGElement>) {
     custom.bands = newTrim;
     custom.garage = newTrim;
     custom.frontDoor = newTrim;
+  }
+
+  if (doorScheme) {
+    custom.frontDoor = doorScheme.frontDoor;
+    custom.garage = doorScheme.garage;
   }
   
   const paint = {
