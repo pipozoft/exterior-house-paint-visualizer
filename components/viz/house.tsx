@@ -13,6 +13,7 @@ function House(props: React.SVGProps<SVGSVGElement>) {
   const roofColor = searchParams.get("roofColor") || DEFAULT_ROOF_COLOR;
   const doorId = searchParams.get("doorId");
   const trimOption = parseInt(searchParams.get("trimOption") || '0');
+  const reverse = parseInt(searchParams.get("reverse") || '0');
 
   const scheme = (schemeId && getSchemeFromId(schemeId)) || (DEFAULT_SCHEME as HoaScheme);
   const doorScheme = doorId && getDoorSchemeFromId(doorId);
@@ -33,10 +34,20 @@ function House(props: React.SVGProps<SVGSVGElement>) {
     custom.frontDoor = doorScheme.frontDoor;
     custom.garage = doorScheme.garage;
   }
+
+  if (reverse && reverse === 1) {
+    const newTrim = custom.body;
+    custom.body = custom.accent!;
+    custom.fascia = newTrim;
+    custom.accent = newTrim;
+    custom.bands = newTrim;
+    custom.garage = newTrim;
+    custom.frontDoor = newTrim;
+  }
   
   const paint = {
     ...scheme,
-    body: getHexFromSwColorId(scheme.body),
+    body: getHexFromSwColorId(custom.body),
     fascia: getHexFromSwColorId(custom.fascia!) || scheme.fascia && getHexFromSwColorId(scheme.fascia),
     accent: getHexFromSwColorId(custom.accent!) || scheme.accent && getHexFromSwColorId(scheme.accent),
     bands: getHexFromSwColorId(custom.bands!) || scheme.bands && getHexFromSwColorId(scheme.bands),

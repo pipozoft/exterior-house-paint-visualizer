@@ -42,6 +42,10 @@ const options = schemes.map((s) => {
         if (params.get('trimOption')) {
             params.delete('trimOption');
         }
+
+        if (params.get('reverse')) {
+            params.delete('reverse');
+        }
   
         return params.toString();
       },
