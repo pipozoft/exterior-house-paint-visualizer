@@ -9,9 +9,10 @@ interface Props {
 
 export default function Scheme({ value }: Props) {
   return (
-    <>
+    <div className="mt-8">
+      <h1 className="text-xl px-6">{value?.name}</h1>
       {value && (
-        <div className="grid lg:grid-rows-3 lg:grid-cols-3 p-4">
+        <div className="grid lg:grid-rows-2 lg:grid-cols-3 p-4">
           <Color id={value.body || 'WHITE'} title="Body" />
           <Color id={value.fascia || 'WHITE'} title="fascia" />
           <Color id={value.accent || 'WHITE'} title="accent" />
@@ -20,6 +21,7 @@ export default function Scheme({ value }: Props) {
           <Color id={value.frontDoor || 'WHITE'} title="Front Door" />
         </div>
       )}
-    </>
+      <small className="text-gray-800 px-6 italic">* {value?.notes}</small>
+    </div>
   );
 }
