@@ -17,13 +17,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Check, ChevronsUpDown } from "lucide-react";
-
-const options = schemes.map((s) => {
-    return {
-      value: s.id,
-      label: s.name,
-    };
-  });
   
   export function SchemeSelector() {
     const router = useRouter();
@@ -31,6 +24,19 @@ const options = schemes.map((s) => {
     const [open, setOpen] = useState(false);
   
     const schemeIdParam = searchParams.get("schemeId");
+    const brandParam = searchParams.get("brand");
+
+    const options = brandParam ? schemes.filter(s => s.brand === brandParam).map((s) => {
+        return {
+          value: s.id,
+          label: s.name,
+        };
+      }) : schemes.map((s) => {
+        return {
+          value: s.id,
+          label: s.name,
+        };
+      });
   
     // Get a new searchParams string by merging the current
     // searchParams with a provided key/value pair
@@ -67,7 +73,7 @@ const options = schemes.map((s) => {
               aria-expanded={open}
               className="w-full justify-between"
             >
-              {value
+              {(value && schemeIdParam)
                 ? options.find((option) => option.value === value)?.label
                 : "Select scheme..."}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

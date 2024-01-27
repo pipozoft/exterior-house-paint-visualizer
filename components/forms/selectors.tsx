@@ -6,12 +6,14 @@ import { SchemeSelector } from "./selectors/approved-schemes";
 import { DoorSelector } from "./selectors/door-schemes";
 import TrimOptionsSelector from "./selectors/trim-options";
 import ReversibleSelector from "./selectors/reversible";
+import BrandSelector from "./selectors/brand";
 
 
 export function SelectorForm() {
   return (
     <React.Suspense>
       <RoofSelector />
+      <BrandSelector />
       <SchemeSelector />
       <TrimOptionsSelector />
       <ReversibleSelector />
