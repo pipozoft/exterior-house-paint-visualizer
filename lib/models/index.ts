@@ -41,8 +41,10 @@ export interface SwLab {
 export interface DoorScheme {
   id: string;
   name: string;
-  garage?: string | null
-  frontDoor?: string | null
+  garage?: string | null;
+  frontDoor?: string | null;
+  notes?: string;
+  brand?: string;
 }
 
 export interface HoaScheme extends DoorScheme {

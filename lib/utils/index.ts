@@ -1,9 +1,12 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import colors from '@/lib/data/sw-colors.json';
+import swColors from '@/lib/data/sw-colors.json';
+import bmColors from '@/lib/data/bm-colors.json';
 import schemes from '@/lib/data/hoa-schemes.json';
 import doorSchemes from '@/lib/data/door-schemes.json';
 import { HoaScheme } from "../models";
+
+const colors = [...swColors, ...bmColors];
 
 export function getHexFromSwColorId(id: string) {
     const color = colors.find(c => c.colorNumber === id);
